@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1,viewport-fit=cover" name="viewport"/>
+  <title>
+   Coolkie
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&amp;family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,800&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <svg aria-hidden="true" focusable="false" height="0" style="position:absolute" width="0">
+   <defs>
+    <filter height="120%" id="ck-rough" width="120%" x="-10%" y="-10%">
+     <feturbulence basefrequency="0.07" numoctaves="2" result="n" seed="4" type="fractalNoise">
+     </feturbulence>
+     <fedisplacementmap in="SourceGraphic" in2="n" scale="6" xchannelselector="R" ychannelselector="G">
+     </fedisplacementmap>
+    </filter>
+    <filter height="140%" id="ck-blur" width="140%" x="-20%" y="-20%">
+     <fegaussianblur stddeviation="3">
+     </fegaussianblur>
+    </filter>
+    <radialgradient cx=".5" cy=".5" id="ck-shade" r=".5">
+     <stop offset=".55" stop-color="#000" stop-opacity="0">
+     </stop>
+     <stop offset="1" stop-color="#000" stop-opacity=".4">
+     </stop>
+    </radialgradient>
+    <radialgradient cx=".5" cy=".5" id="ck-light" r=".5">
+     <stop offset="0" stop-color="#fff" stop-opacity=".45">
+     </stop>
+     <stop offset="1" stop-color="#fff" stop-opacity="0">
+     </stop>
+    </radialgradient>
+   </defs>
+  </svg>
+  <div class="wrap">
+   <header class="nav" id="nav">
+    <a class="logo" href="#"><span style="display:block"></span><img class="logoimg" src="coolkielogo.png" alt=""></a>
+    <nav aria-label="Se&ccedil;&otilde;es" class="links">
+     <a href="#sabores">
+      Sabores
+     </a>
+     <a href="#como">
+      Como funciona
+     </a>
+     <a href="#monte">
+      Montar caixa
+     </a>
+     <a href="#duvidas">
+      D&uacute;vidas
+     </a>
+    </nav>
+    <div class="nav-right">
+     <a class="pill solid" href="#monte" id="box-btn">
+      <span class="mini" id="mini-cookie">
+      </span>
+      <span class="lbl">
+       Caixa
+      </span>
+      <span class="num" id="box-count">
+       0/6
+      </span>
+     </a>
+     <a aria-label="Carrinho" class="pill line" href="#carrinho" id="cart-link">
+      <svg aria-hidden="true" class="ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+       <path d="M5 8h14l-1.2 12H6.2L5 8z">
+       </path>
+       <path d="M9 8V7a3 3 0 016 0v1">
+       </path>
+      </svg>
+      <span class="cnt num" id="cart-cnt">
+       0
+      </span>
+     </a>
+     <a class="pill line" href="#entrar" id="acct-link">
+      <svg aria-hidden="true" class="ic" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+       <circle cx="12" cy="8" r="4">
+       </circle>
+       <path d="M4 21c1-4 4-6 8-6s7 2 8 6">
+       </path>
+      </svg>
+      <span class="lbl" id="acct-lbl">
+       Entrar
+      </span>
+     </a>
+    </div>
+    <span class="progress" id="progress">
+    </span>
+   </header>
+   <!-- ========== INÍCIO ========== -->
+   <main class="view" id="view-home">
+    <section class="hero" id="hero">
+     <div>
+      <h1 class="rise">
+       Cookie grosso,
+       <em>
+        caixa
+       </em>
+       do seu jeito.
+      </h1>
+      <p class="lead rise" style="animation-delay:.12s">
+       Monte uma caixa com os sabores da semana ou leve cookies na unidade. O pedido sai pronto para o WhatsApp.
+      </p>
+      <div class="actions rise" style="animation-delay:.24s">
+       <a class="pill solid" href="#monte">
+        Montar minha caixa
+       </a>
+       <a class="pill line" href="#sabores" id="hero-unit">
+        Comprar na unidade
+       </a>
+      </div>
+     </div>
+     <div aria-hidden="true" class="hero-art" id="hero-art">
+      <div class="layer m1">
+       <div class="f" id="m1">
+       </div>
+      </div>
+      <div class="layer m2">
+       <div class="f" id="m2">
+       </div>
+      </div>
+      <div class="layer m3">
+       <div class="f" id="m3">
+       </div>
+      </div>
+      <div class="layer main spin" id="hero-main">
+      </div>
+     </div>
+    </section>
+    <div aria-hidden="true" class="ticker">
+     <div class="track" id="ticker">
+     </div>
+    </div>
+    <section class="showcase" id="sabores">
+     <div class="sec-head" data-reveal="">
+      <div>
+       <h2>
+        Sabores
+        <em>
+         da semana
+        </em>
+       </h2>
+       <p id="show-sub">
+        Toque em um sabor para colocar na sua caixa.
+       </p>
+      </div>
+      <div aria-label="Como voc&ecirc; quer comprar" class="seg" role="group">
+       <button aria-pressed="true" id="mode-box" type="button">
+        Montar caixa
+       </button>
+      </div>
+     </div>
+
+     <div class="tiles" id="tiles">
+
+     <article class="tile" style="--c: #fffff">
+       <div class="art">
+           <img src="cookie-oreo.png" alt="Cookie tradicional">
+       </div>
+       <h3>Cookies & Creams Cookie</h3>
+       <p class="desc">
+           Massa amanteigada com gotas de chocolate ao leite.
+       </p>
+       <button class="pill solid" type="button">
+           Colocar na caixa
+       </button>
+
+     </article>
+
+      <article class="tile" style="--c: #ffecd0">
+       <div class="art">
+           <img src="cookie-tiramisu.png" alt="">
+       </div>
+       <h3>Tiramisú Cookie</h3>
+       <p class="desc">
+           Massa amanteigada com gotas de chocolate ao leite.
+       </p>
+       <button class="pill solid" type="button">
+           Colocar na caixa
+       </button>
+
+     </article>
+
+      <article class="tile" style="--c: #ffecd0">
+       <div class="art">
+           <img src="cookie-peanut.avif" alt="">
+       </div>
+       <h3>Peanut Butter Cookie</h3>
+       <p class="desc">
+           Massa amanteigada com gotas de chocolate ao leite.
+       </p>
+       <button class="pill solid" type="button">
+           Colocar na caixa
+       </button>
+
+     </article>
+
+      <article class="tile" style="--c: #ffecd0">
+       <div class="art">
+           <img src="cookie-churros.png" alt="">
+       </div>
+       <h3>Churros Cookie</h3>
+       <p class="desc">
+           Massa amanteigada com gotas de chocolate ao leite.
+       </p>
+       <button class="pill solid" type="button">
+           Colocar na caixa
+       </button>
+
+     </article>
+      <article class="tile" style="--c: #ffecd0">
+       <div class="art">
+           <img src="cookie-trad.avif" alt="Cookie tradicional">
+       </div>
+       <h3>Chocolate Chip Cookie</h3>
+       <p class="desc">
+           Massa amanteigada com gotas de chocolate ao leite.
+       </p>
+       <button class="pill solid" type="button">
+           Colocar na caixa
+       </button>
+
+     </article>
+
+      <article class="tile" style="--c: #ffecd0">
+       <div class="art">
+           <img src="cookie-straw.png" alt="">
+       </div>
+       <h3>Strawberry Cheesecake Cookie</h3>
+       <p class="desc">
+           Massa amanteigada com gotas de chocolate ao leite.
+       </p>
+       <button class="pill solid" type="button">
+           Colocar na caixa
+       </button>
+
+     </article>
+
+      <article class="tile" style="--c: #ffecd0">
+       <div class="art">
+           <img src="cookie-frozenhot.png" alt="">
+       </div>
+       <h3>Frozen Hot Cookie</h3>
+       <p class="desc">
+           Massa amanteigada com gotas de chocolate ao leite.
+       </p>
+       <button class="pill solid" type="button">
+           Colocar na caixa
+       </button>
+
+     </article>
+
+     <article class="tile" style="--c: #f0dcd3">
+        <div class="art">
+            <img src="cookie-redvelvet.png" alt="">
+        </div>
+        <h3>Red Velvet Cookie</h3>
+        <p class="desc">
+            Massa de cacau com pedaços de chocolate meio amargo.
+        </p>
+        <button class="pill solid" type="button">
+            Colocar na caixa
+        </button>
+     </article>
+
+     </div>
+    </section>
+    <section class="how" id="como">
+     <h2 class="section-title" data-reveal="">
+      Como
+      <em>
+       funciona
+      </em>
+     </h2>
+     <div class="steps">
+      <div class="step" data-reveal="">
+       <div class="n">
+        1
+       </div>
+       <h3>
+        Escolha como comprar
+       </h3>
+       <p>
+        Caixas de 2, 4, 6 ou 12 cookies, ou cookies avulsos na unidade.
+       </p>
+      </div>
+      <div class="step" data-reveal="">
+       <div class="n">
+        2
+       </div>
+       <h3>
+        Misture os sabores
+       </h3>
+       <p>
+        Cada lugar da caixa pode ter um sabor diferente. Voc&ecirc; v&ecirc; a caixa se enchendo na hora.
+       </p>
+      </div>
+      <div class="step" data-reveal="">
+       <div class="n">
+        3
+       </div>
+       <h3>
+        Envie o pedido
+       </h3>
+       <p>
+        No carrinho, a mensagem sai pronta com sabores, total e forma de receber.
+       </p>
+      </div>
+     </div>
+    </section>
+    <section class="builder" id="monte">
+     <div data-reveal="">
+      <h2 class="section-title">
+       Monte sua
+       <em>
+        caixa
+       </em>
+      </h2>
+      <p class="sub">
+       Misture sabores &agrave; vontade. A caixa s&oacute; fecha quando todos os lugares estiverem preenchidos. Prefere levar s&oacute; alguns?
+       <button class="linklike" id="go-unit" type="button">
+        Comprar na unidade
+       </button>
+      </p>
+     </div>
+     <div class="cols" data-reveal="">
+      <div>
+       <div class="stepname">
+        <span>
+         1. Tamanho
+        </span>
+       </div>
+       <div class="sizes" id="sizes">
+       </div>
+       <div class="stepname">
+        <span>
+         2. Sabores
+        </span>
+        <span class="num" id="count-label">
+        </span>
+       </div>
+       <div class="flavors" id="flavors">
+       </div>
+      </div>
+      <aside aria-label="Sua caixa" class="panel">
+       <h3 id="panel-title">
+        Sua caixa
+       </h3>
+       <div aria-hidden="true" class="bar">
+        <i id="bar-fill">
+        </i>
+       </div>
+       <div class="slots" id="slots">
+       </div>
+       <p class="status num" id="status">
+       </p>
+       <button class="primary" id="add-box" type="button">
+        Adicionar caixa ao carrinho
+       </button>
+       <button class="ghost" id="clear-box" type="button">
+        Limpar escolhas
+       </button>
+       <a class="to-cart" href="#carrinho" id="panel-cart">
+        Ver carrinho
+       </a>
+      </aside>
+     </div>
+    </section>
+    <section class="faq" id="duvidas">
+     <h2 class="section-title" data-reveal="">
+      Algumas
+      <em>
+       d&uacute;vidas
+      </em>
+     </h2>
+     <div class="faq-list" data-reveal="">
+      <details>
+       <summary>
+        Posso misturar sabores na mesma caixa?
+       </summary>
+       <p>
+        Pode. Cada lugar da caixa aceita um sabor diferente, e voc&ecirc; pode repetir o mesmo sabor quantas vezes quiser.
+       </p>
+      </details>
+      <details>
+       <summary>
+        D&aacute; para comprar s&oacute; um cookie?
+       </summary>
+       <p>
+        D&aacute;. Escolha Comprar na unidade na vitrine de sabores e adicione quantos quiser ao carrinho.
+       </p>
+      </details>
+      <details>
+       <summary>
+        Como funciona a retirada e a entrega?
+       </summary>
+       <p>
+        Voc&ecirc; escolhe uma das duas ao finalizar o pedido. Hor&aacute;rios, taxa e prazo a gente combina com voc&ecirc; pelo WhatsApp.
+       </p>
+      </details>
+      <details>
+       <summary>
+        Preciso criar conta para pedir?
+       </summary>
+       <p>
+        N&atilde;o. A conta &eacute; opcional e serve para deixar seu nome e endere&ccedil;o salvos neste aparelho.
+       </p>
+      </details>
+      <details>
+       <summary>
+        Posso encomendar para festas e presentes?
+       </summary>
+       <p>
+        Pode. A caixa de 12 &eacute; uma boa pedida para presentear. Para quantidades maiores, escreva nas observa&ccedil;&otilde;es do pedido.
+       </p>
+      </details>
+     </div>
+    </section>
+   </main>
+   <!-- ========== CARRINHO ========== -->
+   <main class="view" hidden="" id="view-carrinho">
+    <a class="crumb" href="#sabores">
+     &larr; Continuar comprando
+    </a>
+    <div class="page-head">
+     <h1 class="page-title" id="cart-title" tabindex="-1">
+      Seu
+      <em>
+       carrinho
+      </em>
+     </h1>
+    </div>
+    <div class="empty-cart" hidden="" id="cart-empty">
+     <div class="art" id="empty-art">
+     </div>
+     <h2>
+      Seu carrinho est&aacute; vazio
+     </h2>
+     <p>
+      Monte uma caixa ou escolha cookies na unidade para come&ccedil;ar o pedido.
+     </p>
+     <div class="actions">
+      <a class="pill solid" href="#monte">
+       Montar uma caixa
+      </a>
+      <a class="pill line" href="#sabores" id="empty-unit">
+       Comprar na unidade
+      </a>
+     </div>
+    </div>
+    <div class="cart-grid" id="cart-layout">
+     <div class="cart-list" id="cart-items">
+     </div>
+     <div class="summary">
+      <div class="card">
+       <h2>
+        Resumo
+       </h2>
+       <div id="sum-lines" style="display:grid;gap:8px">
+       </div>
+       <div class="total num">
+        <span>
+         Total
+        </span>
+        <span id="sum-total">
+         R$ 0,00
+        </span>
+       </div>
+      </div>
+      <div class="card">
+       <h2>
+        Finalizar pedido
+       </h2>
+       <div class="hint" id="acct-hint">
+       </div>
+       <label for="f-name">
+        Seu nome
+        <input autocomplete="name" id="f-name" placeholder="Como podemos te chamar?" type="text"/>
+       </label>
+       <label for="f-mode">
+        Como prefere receber
+        <select id="f-mode">
+         <option value="retirada">
+          Retirada
+         </option>
+         <option value="entrega">
+          Entrega
+         </option>
+        </select>
+       </label>
+       <label for="f-addr" hidden="" id="addr-wrap">
+        Endere&ccedil;o de entrega
+        <input autocomplete="street-address" id="f-addr" placeholder="Rua, n&uacute;mero, bairro" type="text"/>
+       </label>
+       <label for="f-note">
+        Observa&ccedil;&otilde;es
+        <textarea id="f-note" placeholder="Data desejada, presente, alergias..."></textarea>
+       </label>
+       <label for="f-preview">
+        Mensagem do pedido
+        <textarea class="preview" id="f-preview" readonly=""></textarea>
+       </label>
+       <a class="primary" hidden="" href="#carrinho" id="wa-link" rel="noopener" target="_blank">
+        Enviar pedido pelo WhatsApp
+       </a>
+       <button class="ghost" id="copy-btn" type="button">
+        Copiar mensagem
+       </button>
+       <p class="toast" id="toast" role="status">
+       </p>
+       <p class="note">
+        Os valores e sabores desta p&aacute;gina s&atilde;o exemplos e podem mudar.
+       </p>
+      </div>
+     </div>
+    </div>
+   </main>
+   <!-- ========== ENTRAR ========== -->
+   <main class="view" hidden="" id="view-entrar">
+    <div class="auth">
+     <div class="auth-side">
+      <div aria-hidden="true" class="art spin" id="auth-art-l">
+      </div>
+      <h2>
+       Que bom te ver
+       <em>
+        de novo
+       </em>
+       .
+      </h2>
+      <ul>
+       <li>
+        Nome e endere&ccedil;o j&aacute; preenchidos no pedido
+       </li>
+       <li>
+        Pedido sem precisar digitar tudo outra vez
+       </li>
+      </ul>
+     </div>
+     <div class="auth-main">
+      <h1 id="login-title" tabindex="-1">
+       Entrar
+      </h1>
+      <form id="form-login" novalidate="">
+       <label for="l-email">
+        E-mail
+        <input autocomplete="email" id="l-email" placeholder="voce@email.com" type="email"/>
+       </label>
+       <label for="l-pass">
+        Senha
+        <span class="pw">
+         <input autocomplete="current-password" id="l-pass" placeholder="Sua senha" type="password"/>
+         <button class="eye" type="button">
+          Mostrar
+         </button>
+        </span>
+       </label>
+       <p class="err" id="l-err" role="alert">
+       </p>
+       <button class="primary" type="submit">
+        Entrar
+       </button>
+      </form>
+      <p class="alt">
+       Ainda n&atilde;o tem conta?
+       <a href="#cadastro">
+        Cadastre-se
+       </a>
+      </p>
+      <p class="note">
+       A conta fica salva neste aparelho e neste navegador.
+      </p>
+     </div>
+    </div>
+   </main>
+   <!-- ========== CADASTRO ========== -->
+   <main class="view" hidden="" id="view-cadastro">
+    <div class="auth">
+     <div class="auth-side">
+      <div aria-hidden="true" class="art spin" id="auth-art-r">
+      </div>
+      <h2>
+       Crie sua conta
+       <em>
+        Coolkie
+       </em>
+       .
+      </h2>
+      <ul>
+       <li>
+        Leva menos de um minuto
+       </li>
+       <li>
+        Seus dados ficam prontos para o pr&oacute;ximo pedido
+       </li>
+      </ul>
+     </div>
+     <div class="auth-main">
+      <h1 id="signup-title" tabindex="-1">
+       Cadastro
+      </h1>
+      <form id="form-signup" novalidate="">
+       <div class="row2">
+        <label for="s-name">
+         Nome
+         <input autocomplete="name" id="s-name" placeholder="Seu nome" type="text"/>
+        </label>
+        <label for="s-phone">
+         WhatsApp
+         <input autocomplete="tel" id="s-phone" placeholder="(31) 90000-0000" type="tel"/>
+        </label>
+       </div>
+       <label for="s-email">
+        E-mail
+        <input autocomplete="email" id="s-email" placeholder="voce@email.com" type="email"/>
+       </label>
+       <div class="row2">
+        <label for="s-pass">
+         Senha
+         <span class="pw">
+          <input autocomplete="new-password" id="s-pass" placeholder="M&iacute;nimo de 6 caracteres" type="password"/>
+          <button class="eye" type="button">
+           Mostrar
+          </button>
+         </span>
+        </label>
+        <label for="s-pass2">
+         Repetir senha
+         <span class="pw">
+          <input autocomplete="new-password" id="s-pass2" placeholder="Repita a senha" type="password"/>
+          <button class="eye" type="button">
+           Mostrar
+          </button>
+         </span>
+        </label>
+       </div>
+       <label for="s-addr">
+        Endere&ccedil;o de entrega (opcional)
+        <input autocomplete="street-address" id="s-addr" placeholder="Rua, n&uacute;mero, bairro" type="text"/>
+       </label>
+       <p class="err" id="s-err" role="alert">
+       </p>
+       <button class="primary" type="submit">
+        Criar conta
+       </button>
+      </form>
+      <p class="alt">
+       J&aacute; tem conta?
+       <a href="#entrar">
+        Entrar
+       </a>
+      </p>
+      <p class="note">
+       A conta fica salva neste aparelho e neste navegador.
+      </p>
+     </div>
+    </div>
+   </main>
+   <!-- ========== CONTA ========== -->
+   <main class="view" hidden="" id="view-conta">
+    <div class="auth">
+     <div class="auth-side">
+      <div aria-hidden="true" class="art spin" id="auth-art-c">
+      </div>
+      <h2 id="acct-hello">
+       Ol&aacute;!
+      </h2>
+      <ul>
+       <li>
+        Seus dados preenchem o carrinho sozinhos
+       </li>
+      </ul>
+     </div>
+     <div class="auth-main">
+      <h1 id="conta-title" tabindex="-1">
+       Minha conta
+      </h1>
+      <form id="form-account" novalidate="">
+       <label for="c-email">
+        E-mail
+        <input id="c-email" readonly="" type="email"/>
+       </label>
+       <div class="row2">
+        <label for="c-name">
+         Nome
+         <input autocomplete="name" id="c-name" type="text"/>
+        </label>
+        <label for="c-phone">
+         WhatsApp
+         <input autocomplete="tel" id="c-phone" type="tel"/>
+        </label>
+       </div>
+       <label for="c-addr">
+        Endere&ccedil;o de entrega
+        <input autocomplete="street-address" id="c-addr" placeholder="Rua, n&uacute;mero, bairro" type="text"/>
+       </label>
+       <p class="err" id="c-err" role="alert">
+       </p>
+       <button class="primary" type="submit">
+        Salvar dados
+       </button>
+      </form>
+      <button class="ghost" id="logout-btn" type="button">
+       Sair da conta
+      </button>
+     </div>
+    </div>
+   </main>
+   <footer>
+    <div>
+     <a class="logo" href="#">
+      coolkie
+     </a>
+     <p>
+      Cookies artesanais, montados do seu jeito.
+     </p>
+    </div>
+    <nav aria-label="Rodap&eacute;">
+     <a href="#sabores">
+      Sabores
+     </a>
+     <a href="#monte">
+      Montar caixa
+     </a>
+     <a href="#carrinho">
+      Carrinho
+     </a>
+     <a href="#entrar" id="foot-acct">
+      Entrar
+     </a>
+     <a href="#duvidas">
+      D&uacute;vidas
+     </a>
+    </nav>
+    <p class="copy">
+     Pedidos combinados direto com a loja.
+    </p>
+   </footer>
+  </div>
+  <div aria-live="polite" class="snack" id="snack" role="status">
+  </div>
+  <script src="script.js"></script>
+ </body>
+</html>
